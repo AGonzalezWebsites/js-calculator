@@ -1,30 +1,100 @@
-const one = document.querySelector('.one')
-const two = document.querySelector('.two')
-const three = document.querySelector('.three')
-const four = document.querySelector('.four')
-const five = document.querySelector('.five')
-const six = document.querySelector('.six')
-const seven = document.querySelector('.seven')
-const eight = document.querySelector('.eight')
-const nine = document.querySelector('.nine')
+const output = document.querySelector('.result');
 
-one.addEventListener('click', () => numPressed(parseInt(one.value)))
-two.addEventListener('click', () => numPressed(parseInt(two.value)))
-three.addEventListener('click', () => numPressed(parseInt(three.value)))
-four.addEventListener('click', () => numPressed(parseInt(four.value)))
-five.addEventListener('click', () => numPressed(parseInt(five.value)))
-six.addEventListener('click', () => numPressed(parseInt(six.value)))
-seven.addEventListener('click', () => numPressed(parseInt(seven.value)))
-eight.addEventListener('click', () => numPressed(parseInt(eight.value)))
-nine.addEventListener('click', () => numPressed(parseInt(nine.value)))
+const C = document.querySelector('.C');
+const CE = document.querySelector('.CE');
 
-let operatorPressed = false;
-let leftNum = 0;
-let rightNum = 0;
-const numPressed = (num) => {
-    if (!operatorPressed) leftNum = `${leftNum}${num}`;
-    else rightNum += `${rightNum}${num}`;
+const zero = document.querySelector('.zero');
+const one = document.querySelector('.one');
+const two = document.querySelector('.two');
+const three = document.querySelector('.three');
+const four = document.querySelector('.four');
+const five = document.querySelector('.five');
+const six = document.querySelector('.six');
+const seven = document.querySelector('.seven');
+const eight = document.querySelector('.eight');
+const nine = document.querySelector('.nine');
+const decimal = document.querySelector('.decimal');
+
+C.addEventListener('click', () => clearCalc());
+CE.addEventListener('click', () => clearCalc());
+
+decimal.addEventListener('click', () => numPressed(decimal.value));
+zero.addEventListener('click', () => numPressed(parseInt(zero.value)));
+one.addEventListener('click', () => numPressed(parseInt(one.value)));
+two.addEventListener('click', () => numPressed(parseInt(two.value)));
+three.addEventListener('click', () => numPressed(parseInt(three.value)));
+four.addEventListener('click', () => numPressed(parseInt(four.value)));
+five.addEventListener('click', () => numPressed(parseInt(five.value)));
+six.addEventListener('click', () => numPressed(parseInt(six.value)));
+seven.addEventListener('click', () => numPressed(parseInt(seven.value)));
+eight.addEventListener('click', () => numPressed(parseInt(eight.value)));
+nine.addEventListener('click', () => numPressed(parseInt(nine.value)));
+
+const divide = document.querySelector('.divide');
+const multiply = document.querySelector('.multiply');
+const subtract = document.querySelector('.subtract');
+const add = document.querySelector('.add');
+
+divide.addEventListener('click', () => opPressed(divide.value));
+multiply.addEventListener('click', () => opPressed(multiply.value));
+subtract.addEventListener('click', () => opPressed(subtract.value));
+add.addEventListener('click', () => opPressed(add.value));
+
+const equal = document.querySelector('.equal');
+equal.addEventListener('click', () => display(result(operator, leftNum, rightNum)));
+
+
+const clearCalc = () =>{
+    console.log(1);
+    operatorPressed = false;
+    leftNum = 0;
+    rightNum = 0;
+    output.innerText = '0';
 }
+
+
+    let operatorPressed = false;
+    let leftNum = 0;
+    let rightNum = 0;
+const numPressed = (num) => {
+    if (!operatorPressed) {
+        leftNum = `${leftNum}${num}`;
+        output.innerText = parseFloat(leftNum);
+    }
+    else {
+        rightNum = `${rightNum}${num}`;
+        output.innerText = `${parseFloat(leftNum)} ${operator} ${parseFloat(rightNum)}`;
+    }
+}
+
+let operator = "";
+const opPressed = (op) => {
+    operator = op;
+    operatorPressed = true;
+    output.innerText = `${parseFloat(leftNum)} ${operator}`;
+}
+
+
+const equals = () => {
+    result = parseFloat(leftNum);
+}
+
+const result = (op, a, b) => {
+    {switch (op)
+        {
+            case '+': return parseFloat(a) + parseFloat(b);
+            case '-': return a - b;
+            case '*': return a * b;
+            case '/': return a / b;
+            default: return 'Try Again';
+        }
+    }
+}
+
+const display = (x) => {
+    output.innerText = `${x}`;
+}
+
 
 
 

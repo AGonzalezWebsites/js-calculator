@@ -1,7 +1,14 @@
+html {
+    height: 100%;
+}
+
 body {
     display: flex;
     justify-content: center;
     box-sizing: border-box;
+    height: 100%;
+    align-items: center;
+    background-color: rgb(134, 134, 134);
 }
 
 .calcContainer {
@@ -9,10 +16,12 @@ body {
     justify-content: center;
     flex-direction: column;
     flex: 1 1 auto;
-    border: 1px inset black;
-    max-height: 600px;
-    min-height: 400px;
-    max-width: 300px;
+    border: 1px inset rgb(194, 194, 194);
+    border-radius: 10px;
+    max-height: 800px;
+    min-height: 600px;
+    max-width: 400px;
+    min-width: 300px;
 }
 
 .screenContainer {
@@ -20,16 +29,19 @@ body {
     flex: 1 1 auto;
     justify-content: flex-end;
     align-items: center;
+    background-color: rgb(255, 253, 244);
     border: 1px inset black;
+    border-radius: 10px 10px 0 0;
 }
 
 .screenContainer .result {
     display: flex;
+    font-size: 60px;
 }
 
 .buttonsContainer {
     display: flex;
-    flex: 3 1 auto;
+    flex: 5 1 auto;
     flex-direction: column;
     justify-content: space-between;
 }
@@ -49,6 +61,30 @@ body {
     font-size: 20px;
 }
 
+.zero, .one, .two, .three, .four, .five, .six, .seven, .eight, .nine, .decimal {
+    background-color: antiquewhite;
+}
+
+.row1 button {
+    background-color: rgb(255, 169, 169);
+}
+
+.equal {
+    background-color: aquamarine;
+}
+
+.subtract, .divide, .add, .multiply {
+    background-color: rgb(255, 244, 148);
+}
+
+.zero {
+    border-radius: 0 0 0 10px;
+}
+
+.add {
+    border-radius: 0 0 10px 0;
+}
+
 button {
     cursor:pointer;
     background: white;
@@ -57,4 +93,9 @@ button {
 button:active {
     background: rgb(209, 209, 209);
     border: 1px solid black;
+}
+
+.result {
+    font-size: 40px;
+    padding: 0 10px;
 }
