@@ -41,30 +41,36 @@ subtract.addEventListener('click', () => opPressed(subtract.value));
 add.addEventListener('click', () => opPressed(add.value));
 
 const equal = document.querySelector('.equal');
-equal.addEventListener('click', () => display(result(operator, leftNum, rightNum)));
+equal.addEventListener('click', () => display(getResult(operator, leftNum, rightNum)));
 
 
 const clearCalc = () =>{
     console.log(1);
     operatorPressed = false;
-    leftNum = 0;
-    rightNum = 0;
+    leftNum = "0";
+    rightNum = "0";
     output.innerText = '0';
 }
 
 
-    let operatorPressed = false;
-    let leftNum = 0;
-    let rightNum = 0;
+let operatorPressed = false;
+let leftNum = "0";
+let rightNum = "0";
 const numPressed = (num) => {
-    if (!operatorPressed) {
+    if (!operatorPressed && leftNum.length < 8) {
         leftNum = `${leftNum}${num}`;
-        output.innerText = parseFloat(leftNum);
-    }
-    else {
+        output.innerText = removeLead(leftNum);     
+    } else if (!operatorPressed) alert("Too Many Numbers");
+    
+    if (operatorPressed && rightNum.length < 8) {
         rightNum = `${rightNum}${num}`;
-        output.innerText = `${parseFloat(leftNum)} ${operator} ${parseFloat(rightNum)}`;
-    }
+        output.innerText = `${parseFloat(leftNum)} ${operator} ${removeLead(rightNum)}`;
+    } else if (operatorPressed) alert("Too Many Numbers")
+}
+
+//Removes leading numer, specifically the initial zero
+const removeLead = (num) => {
+    return parseFloat(num).toString()
 }
 
 let operator = "";
@@ -74,12 +80,7 @@ const opPressed = (op) => {
     output.innerText = `${parseFloat(leftNum)} ${operator}`;
 }
 
-
-const equals = () => {
-    result = parseFloat(leftNum);
-}
-
-const result = (op, a, b) => {
+const getResult = (op, a, b) => {
     {switch (op)
         {
             case '+': return parseFloat(a) + parseFloat(b);
@@ -91,8 +92,15 @@ const result = (op, a, b) => {
     }
 }
 
+let result = `0`;
 const display = (x) => {
-    output.innerText = `${x}`;
+    result = Math.round(x * 10000) / 10000;
+    output.innerText = result;
+    saveLastEquation();
+}
+
+const saveLastEquation = () => {
+    alert(`${parseFloat(leftNum)} ${operator} ${removeLead(rightNum)} = ${result}`)
 }
 
 

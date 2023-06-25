@@ -39,6 +39,11 @@ body {
     font-size: 60px;
 }
 
+.lastOperation {
+    position: absolute;
+    top: 0px;
+}
+
 .buttonsContainer {
     display: flex;
     flex: 5 1 auto;
